@@ -1,0 +1,23 @@
+<%include ../partials/header %>
+
+<div class="container">
+
+        <p style="text-align:center;font-size:250%;font-family:'Oswald', sans-serif">Add new comment to <%= post.name%></p>
+        
+            <div class="row">
+                <div style="width:30% ; margin : 25px auto ;">
+                    <form action="/posts/<%= post._id%>/comments" method="POST">
+                        <div class="form-group">
+                            <input class="form-control" type="text" placeholder="comment" name="comment[text]">
+                        </div>
+                       
+                         <div class="form-group">
+                             <button class="btn btn-primary btn-lg btn-block " >Submit</button>
+                        </div>
+                     </form>
+                    <a class="btn btn-danger" href="/posts/<%= post._id%>">Go Back</a>
+                </div>
+            </div>
+        
+
+<%include ../partials/footer %>

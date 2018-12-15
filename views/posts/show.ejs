@@ -1,0 +1,85 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+       <div class="col-md-3">
+            <div style="width:100%; margin:10% auto;">
+         <div class="list-group">
+            <li class="list-group-item active"><h1 style="font-family:'Oswald', sans-serif;font-size:400%"><%= post.name %></h1></li>
+         </div>
+         <a style="margin:2px" class="btn btn-danger" href="/posts">Go Back</a>
+         
+         
+<% if(currentUser && post.author.id.equals(currentUser._id)){%>
+    
+         
+         <a style="margin:2px" class="btn btn-info" href="/posts/<%= post._id%>/edit">Edit</a>
+         <!--<a style="margin:2px" class="btn btn-warning" href="#">delete</a>-->
+         <form style="display: inline"action="/posts/<%= post._id%>?_method=DELETE" method="POST">
+            <button style="margin:2px" class="btn btn-warning">Delete</button>
+        </form>
+         
+         
+<% }%>
+         
+         </div>
+       </div>
+   
+       <div class="col-md-9">
+       <div style="width:auto; margin: 3% auto;">
+       <div class="thumbnail">
+           <img style="width: auto; margin:auto" src="<%= post.image%>">
+           <div>
+                  
+       </div>
+           <div style="color:black;font-size:200%;font-family:'Oswald', sans-serif;">
+            <span>"<%= post.description %>"</span>
+
+        <span class="pull-right">
+                <a style="color:white" class="btn btn-primary" id="likebutton" href="/posts/<%= post._id%>/like">
+                    <i class="far fa-thumbs-up"></i>LIKE
+                </a>
+            <button class="btn btn-primary">      
+                <span class="badge"style="color:black;" id="display"><%= post.likes %></span>
+                
+                persons liked this post!
+            </button>
+        </span>
+            
+        </div>
+       <div style="color:black;font-size:120%;font-family:'Oswald', sans-serif;padding: 3px">
+            <em style="padding-right:2px">Submitted by </em> <%= post.author.username %>
+       </div>
+       </div>
+       </div>
+       <div class="well">
+            <p style="color:black;font-size: 150%"> <i class="fas fa-comments" aria-hidden="true"></i> Comments</p>
+       <div class="text-right">
+                  
+                   <a class="btn btn-success" href="/posts/<%= post._id%>/comments/new">Add new Comment</a>
+       </div>
+       <div class="row">
+           <div class="col-md-12">
+       <% post.comments.forEach(function(comment){%>
+           <p style="color:black;font-size: 150%">
+               <strong><%= comment.author.username %></strong> -
+               <span> <%= comment.text%></span>
+               
+               <!--<hr style="border: 0;-->
+               <!--        height: 0;-->
+               <!--        border-top: 1px solid rgba(0, 0, 0, 0.1);-->
+               <!--        border-bottom: 1px solid rgba(255, 255, 255, 0.3);">-->
+           </p>
+       <% }) %>
+       </div>
+       </div>
+       </div>
+       </div>
+       </div>
+       </div>
+   
+
+
+<% include ../partials/footer %>  
+
+<!--------------------------------------------------------------------->
